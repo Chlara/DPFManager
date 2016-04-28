@@ -6,20 +6,29 @@ addons:
   apt:
     packages: oracle-java8-installer
 
-os: linux
 sudo: required
 
 matrix:
   include:
     # Custom builds
-    - env: TOKEN=nogui
+    - os: linux
+      env: TOKEN=nogui
       script: mvn test -B -Dtest=commandline/*Test.java,implementationchecker/*Test.java
-    - env: TOKEN=gui
+    - os: linux
+      env: TOKEN=gui
       script: mvn test -B -Dtest=gui/*Test.java
+    - os: osx
+      script: ls -l
   exclude:
     # Exclude default build
     - jdk: oraclejdk8
+    - os: linux
 
 before_install:
   - if [ "${TOKEN}" != "nogui" ]; then export DISPLAY=:99.0; fi
   - if [ "${TOKEN}" != "nogui" ]; then sh -e /etc/init.d/xvfb start; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]
+  - then
+  -   echo "Line 1"
+  -   echo "Line 2"
+  - fi
