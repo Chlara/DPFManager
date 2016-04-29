@@ -19,7 +19,6 @@ matrix:
 #      script: mvn test -B -Dtest=gui/*Test.java
     - os: osx
       env: OS=osx
-      script: ls -l
   exclude:
     # Exclude default build
     - jdk: oraclejdk8
@@ -27,10 +26,10 @@ matrix:
 before_install:
   - if [ "${TOKEN}" == "gui" ]; then export DISPLAY=:99.0; fi
   - if [ "${TOKEN}" == "gui" ]; then sh -e /etc/init.d/xvfb start; fi
-  - if [ "${OS}" == "osx" ]; then sudo ls -l; fi
-  - if [ "${OS}" == "osx" ]; then sudo ls -lR; fi
   - if [ "${OS}" == "osx" ];
     then
-      echo "Line 1";
-      echo "Line 2";
+      sudo brew update;
+      sudo brew tap caskroom/cask;
+      sudo brew install brew-cask;
+      sudo brew cask install java;
     fi
