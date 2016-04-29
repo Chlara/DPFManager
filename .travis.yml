@@ -19,6 +19,7 @@ matrix:
 #      script: mvn test -B -Dtest=gui/*Test.java
     - os: osx
       env: OS=osx
+      script: mvn test -B -q
   exclude:
     # Exclude default build
     - jdk: oraclejdk8
