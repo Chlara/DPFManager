@@ -33,4 +33,6 @@ before_install:
       sudo brew tap caskroom/cask;
       sudo brew install brew-cask;
       sudo brew cask install java;
+      export DISPLAY=:99.0;
+      Xvfb &;
     fi
