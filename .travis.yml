@@ -33,6 +33,7 @@ before_install:
       sudo brew tap caskroom/cask;
       sudo brew install brew-cask;
       sudo brew cask install java;
+      sudo brew cask install xquartz;
       export DISPLAY=:99.0;
-      Xvfb &;
+      xvfb;
     fi
