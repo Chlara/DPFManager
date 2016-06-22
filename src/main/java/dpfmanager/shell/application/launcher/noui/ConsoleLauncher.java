@@ -11,7 +11,9 @@ import dpfmanager.shell.modules.messages.messages.LogMessage;
 
 import org.apache.logging.log4j.Level;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -208,7 +210,30 @@ public class ConsoleLauncher {
         if (!new File(arg_mod).isAbsolute() && !new File(arg_mod).exists() && new File("../" + arg_mod).exists()) {
           arg_mod = "../" + arg;
         }
-        files.add(arg_mod);
+
+
+        File pwd = new File(".");
+        try {
+          System.out.println(pwd.getCanonicalPath());
+          Process p = Runtime.getRuntime().exec("pwd");
+          p.waitFor();
+          BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+          String line;
+          while ((line = reader.readLine())!= null) {
+            System.out.println(line);
+          }
+        } catch (Exception e){
+          e.printStackTrace();
+        }
+
+
+        File file = new File(arg_mod);
+        if (file.exists()){
+          System.out.println("Exists!");
+          files.add(arg_mod);
+        } else {
+          System.out.println("No exists!");
+        }
       }
       idx++;
     }
